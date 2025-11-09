@@ -61,20 +61,20 @@ export default function Home() {
     checkOAuthCallback();
   }, [router, isAuthenticated]);
 
-// Handle Google OAuth
-const handleGoogleLogin = () => {
-  setIsLoading(true);
-  setError('');
-  // OAuth callback will set httpOnly cookies and redirect
-  window.location.href = `${API_BASE_URL}/auth/google`;
-};
-
 // Handle GitHub OAuth
 const handleGithubLogin = () => {
   setIsLoading(true);
   setError('');
-  // OAuth callback will set httpOnly cookies and redirect
-  window.location.href = `${API_BASE_URL}/auth/github`;
+  // Direct redirect - let browser handle it
+  window.open(`${API_BASE_URL}/auth/github`, '_self');
+};
+
+// Handle Google OAuth
+const handleGoogleLogin = () => {
+  setIsLoading(true);
+  setError('');
+  // Direct redirect - let browser handle it
+  window.open(`${API_BASE_URL}/auth/google`, '_self');
 };
 
   // Handle logout
@@ -391,25 +391,6 @@ const handleGithubLogin = () => {
                       {isLoading ? 'Signing in...' : 'Continue with GitHub'}
                     </span>
                   </motion.button>
-
-                  {/* Divider */}
-                  <div className="my-6 flex items-center">
-                    <div className="flex-1 border-t border-gray-200"></div>
-                    <p className="px-3 text-sm text-gray-500">or</p>
-                    <div className="flex-1 border-t border-gray-200"></div>
-                  </div>
-
-                  {/* Email Input */}
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-black transition mb-3"
-                  />
-
-                  {/* Continue Button */}
-                  <button className="w-full px-6 py-3 bg-gray-900 text-white font-medium rounded-lg hover:bg-black transition">
-                    Continue with Email
-                  </button>
                 </div>
 
                 {/* Modal Footer */}
